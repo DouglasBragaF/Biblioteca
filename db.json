@@ -7,6 +7,16 @@
       "editora": "HarperCollins Brasil",
       "ano": "1943",
       "categoria": "Literatura infantil"
+    },
+    {
+      "id": "c799",
+      "nome": "O Capital",
+      "autores": [
+        "Karl Marx"
+      ],
+      "editora": "Boitempo",
+      "ano": "1867",
+      "categoria": "Economia"
     }
   ],
   "leitores": [],

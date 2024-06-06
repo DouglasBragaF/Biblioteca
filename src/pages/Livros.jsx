@@ -17,6 +17,7 @@ function Livros() {
     async function fetchLivros() {
       try {
         const response = await api.get('/livros');
+        // console.log(response.data);
         setLivros(response.data);
         setLoading(false);
       } catch (error) {
@@ -48,6 +49,8 @@ function Livros() {
   const toggleFormulario = () => {
     setMostrarFormulario(!mostrarFormulario);
   };
+  
+  // console.log(livros);
 
   return (
     <div>

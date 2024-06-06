@@ -5,7 +5,7 @@ import './FormularioLivro.css';
 function FormularioLivro({ onCadastro }) {
   const [livro, setLivro] = useState({
     nome: '',
-    autores: [],
+    autores: '',
     editora: '',
     ano: 0,
     categoria: '',
@@ -26,10 +26,11 @@ function FormularioLivro({ onCadastro }) {
   const handleSubmit = event => {
     event.preventDefault();
     if (livro.nome && livro.editora && livro.ano && livro.categoria) {
-      onCadastro(livro);
+      const autoresArray = livro.autores.split(',').map(autor => autor.trim());
+      onCadastro({ ...livro, autores: autoresArray });
       setLivro({
         nome: '',
-        autores: [],
+        autores: '',
         editora: '',
         ano: 0,
         categoria: '',
@@ -52,7 +53,7 @@ function FormularioLivro({ onCadastro }) {
         />
       </label>
       <label>
-        Autores:
+        Autores (separados por vírgulas):
         <input
           type="text"
           name="autores"
