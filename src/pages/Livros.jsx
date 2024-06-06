@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { api } from '../api/api';
 import LivroCard from '../components/LivroCard/LivroCard';
 import FormularioLivro from '../components/FormularioLivro/FormularioLivro';
 import Carregando from '../components/Carregando/Carregando';
@@ -9,12 +10,13 @@ function Livros() {
   const [livros, setLivros] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
 
     async function fetchLivros() {
       try {
-        const response = await axios.get('http://localhost:3000/livros');
+        const response = await api.get('/livros');
         setLivros(response.data);
         setLoading(false);
       } catch (error) {
@@ -26,6 +28,23 @@ function Livros() {
     fetchLivros();
   }, []);
 
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setMostrarFormulario(false);
+    }
+  }, [location]);
+
+  const handleCadastro = async (livro) => {
+    try {
+      const response = await api.post('/livros', livro);
+      setLivros([...livros, response.data]);
+      setMostrarFormulario(false);
+    }
+    catch (error) {
+      console.error('Erro ao cadastrar livro:', error);
+    }
+  };
+
   const toggleFormulario = () => {
     setMostrarFormulario(!mostrarFormulario);
   };
@@ -33,22 +52,24 @@ function Livros() {
   return (
     <div>
       <Menu />
-      {loading ? (
-        <Carregando />
-        ) : (
-          mostrarFormulario ? (
-            <FormularioLivro />
-            ) : (
-          <>
-            <h2>Lista de Livros</h2>
-            <button onClick={toggleFormulario}>Cadastrar Livro</button>
-            <div>
-              {livros.map((livro) => (
+      <h2>Lista de Livros</h2>
+      {!mostrarFormulario && <button onClick={toggleFormulario}>Cadastrar Livro</button>}
+      {mostrarFormulario ? (
+        <FormularioLivro onCadastro={handleCadastro} />
+      ) : (
+        <div>
+          {loading ? (
+            <Carregando />
+          ) : (
+            livros.length > 0 ? (
+              livros.map((livro) => (
                 <LivroCard key={livro.id} livro={livro} />
-              ))}
-            </div>
-          </>
-        )
+              ))
+            ) : (
+              <p>Acervo vazio</p>
+            )
+          )}
+        </div>
       )}
     </div>
   );
