@@ -25,11 +25,8 @@ function FormularioLivro({ onCadastro }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // Verifique se todos os campos necessários foram preenchidos
     if (livro.nome && livro.editora && livro.ano && livro.categoria) {
-      // Execute a função de callback para o cadastro do livro
       onCadastro(livro);
-      // Limpe o estado do formulário após o cadastro
       setLivro({
         nome: '',
         autores: [],
