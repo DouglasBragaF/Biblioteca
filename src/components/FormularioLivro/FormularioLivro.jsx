@@ -35,7 +35,6 @@ function FormularioLivro({ onCadastro }) {
         categoria: '',
       });
     } else {
-      // Caso contrário, exiba uma mensagem de erro ou realize outra ação apropriada
       console.error('Todos os campos obrigatórios devem ser preenchidos');
     }
   };
@@ -92,7 +91,7 @@ function FormularioLivro({ onCadastro }) {
           required
         />
       </label>
-      <button type="submit">Confirmar</button>
+      <button type="submit">Cadastrar</button>
     </form>
   );
 }
