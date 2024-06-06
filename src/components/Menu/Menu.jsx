@@ -6,7 +6,7 @@ function Menu() {
     <nav className="menu">
       <ul>
         <li>
-          <NavLink exact to="/">Home</NavLink>
+          <NavLink exact="true" to="/">Home</NavLink>
         </li>
         <li>
           <NavLink to="/cadastro-leitor">Cadastro de Leitor</NavLink>

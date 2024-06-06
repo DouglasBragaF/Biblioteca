@@ -1,5 +1,14 @@
 {
-  "livros": [],
+  "livros": [
+    {
+      "id": "9fa2",
+      "nome": "O Pequeno Príncipe",
+      "autores": "Antoine de Saint-Exupéry",
+      "editora": "HarperCollins Brasil",
+      "ano": "1943",
+      "categoria": "Literatura infantil"
+    }
+  ],
   "leitores": [],
   "emprestimos": []
 }
